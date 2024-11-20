@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduManager - Student Organization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>EduManager</h1>
+            <nav>
+                <ul>
+                    <li><a href="#assignments">Assignments</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <!-- Track Assignments Section -->
+        <section id="assignments" class="section">
+            <h2>Track Assignments</h2>
+            <p>Manage all your upcoming assignments and deadlines in one place.</p>
+
+            <!-- Assignment Form -->
+            <form id="assignmentForm">
+                <input type="text" id="assignmentTitle" placeholder="Assignment Title" required>
+                <input type="date" id="assignmentDate" required>
+                <button type="submit">Add Assignment</button>
+            </form>
+
+            <ul id="assignmentList">
+                <!-- List of Assignments will appear here -->
+            </ul>
+        </section>
+
+        <!-- Study Resources Section -->
+        <section id="resources" class="section">
+            <h2>Study Resources</h2>
+            <p>Access useful study materials and resources to help you succeed.</p>
+            <ul>
+                <li><a href="#">Mathematics Tutorials</a></li>
+                <li><a href="#">Computer Science Study Guides</a></li>
+                <li><a href="#">Physics Lecture Notes</a></li>
+            </ul>
+        </section>
+
+        <!-- Weekly Schedule Section -->
+        <section id="schedule" class="section">
+            <h2>Your Weekly Schedule</h2>
+            <p>Stay on top of your lectures, study sessions, and important activities.</p>
+
+            <!-- Schedule Form -->
+            <form id="scheduleForm">
+                <input type="text" id="day" placeholder="Day" required>
+                <input type="text" id="activity" placeholder="Activity" required>
+                <button type="submit">Add to Schedule</button>
+            </form>
+
+            <table id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Schedule will be populated here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 EduManager. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Assignments section: Adding new assignments dynamically
+        const assignmentForm = document.getElementById('assignmentForm');
+        const assignmentTitle = document.getElementById('assignmentTitle');
+        const assignmentDate = document.getElementById('assignmentDate');
+        const assignmentList = document.getElementById('assignmentList');
+
+        assignmentForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = assignmentTitle.value;
+            const date = assignmentDate.value;
+            
+            if (title && date) {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${title}</strong> - Due on ${date}`;
+                assignmentList.appendChild(li);
+
+                // Reset the form
+                assignmentTitle.value = '';
+                assignmentDate.value = '';
+            }
+        });
+
+        // Schedule section: Adding new schedule items dynamically
+        const scheduleForm = document.getElementById('scheduleForm');
+        const day = document.getElementById('day');
+        const activity = document.getElementById('activity');
+        const scheduleTable = document.getElementById('scheduleTable').getElementsByTagName('tbody')[0];
+
+        scheduleForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const scheduleDay = day.value;
+            const scheduleActivity = activity.value;
+
+            if (scheduleDay && scheduleActivity) {
+                const row = scheduleTable.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.textContent = scheduleDay;
+                cell2.textContent = scheduleActivity;
+
+                // Reset the form
+                day.value = '';
+                activity.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
